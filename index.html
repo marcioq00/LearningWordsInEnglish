@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Fiszki angielski</title>
+    <script src="js/index.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section id="box-add">
+        <h1>Dodaj słówka do nauki</h1>
+        <form>
+          Wyraz:
+          <input type="text" id="polish" value="" />
+          Tłumaczenie:
+          <input type="text" id="english" value="" />
+          <button type="button" id="btn">Dodaj</button>
+        </form>
+      </section>
+      <section id="box-check">
+        <h2>Utrwalanie słówek</h2>
+        <form>
+          <p id="display-word"></p>
+          Angielski
+          <input type="text" id="word" value="" />
+          <button
+            type="button"
+            id="btn__draw"
+            class="box-check__btn box-check__btn-next"
+          >
+            Następne
+          </button>
+          <button type="button" id="btn__check" class="box-check__btn">
+            Sprawdz
+          </button>
+          <button type="button" id="btn__refresh" class="box-check__btn">
+            Pokaz tabele
+          </button>
+          <button type="button" id="btn__copy" class="box-check__btn">
+            Pokaz kopie tabeli
+          </button>
+          <p id="status-word"></p>
+          <p id="counter"></p>
+        </form>
+      </section>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Wyraz</th>
+            <th>Tłumaczenie</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </main>
+  </body>
+</html>
