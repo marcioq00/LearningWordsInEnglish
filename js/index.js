@@ -33,6 +33,9 @@ let add = (counter, polish, english) => {
     if (e.target.className === `${english}`) {
       let row = e.target.closest("tr");
       row.remove();
+      let index = tab.findIndex((x) => x.englishWord === e.target.className);
+      tab.splice(index, 1);
+      test.splice(index, 1);
     }
   };
   addTab(counter, polish, english);
@@ -49,7 +52,6 @@ let add = (counter, polish, english) => {
       btnDel.textContent = "Delete";
       btnDel.setAttribute("class", `${english}`);
       btnDel.setAttribute("id", `btnDel`);
-      const test = "test";
       const cellText = document.createTextNode(`${counter}`);
       const cellText2 = document.createTextNode(`${polish}`);
       const cellText3 = document.createTextNode(`${english}`);
@@ -147,33 +149,30 @@ btnCheck.addEventListener("click", () => {
   const third = document.getElementById(`${drawWord}`);
   if (checkWord === drawWord) {
     counterGood++;
-    document.querySelector("#status-word").innerHTML =
-      "Bardzo dobrze: " + counterGood;
+    document.querySelector("#status-word").innerHTML = "Good: " + counterGood;
     console.log(third);
     third.classList.add("green");
     if (third.classList.toggle("red")) {
       third.classList.remove("red");
       third.classList.add("green");
-      console.log("git1");
+      console.log("Change to green");
     } else {
-      console.log("git");
+      console.log("Nothing to change");
     }
-    //console.log("dobrze");
   } else if (checkWord != drawWord) {
     counterWrong++;
-    document.getElementById("status-word").innerHTML = "Źle: " + counterWrong;
+    document.getElementById("status-word").innerHTML = "Bad: " + counterWrong;
     console.log(third);
     third.classList.add("red");
     if (third.classList.toggle("green")) {
       third.classList.remove("green");
       third.classList.add("red");
-      console.log("git2");
+      console.log("Change to red");
     } else {
-      console.log("git");
+      console.log("Nothing to change");
     }
-    //console.log("źle");
   } else {
-    console.log("cos innego");
+    console.log("something different");
   }
   //goodBad();
 });
