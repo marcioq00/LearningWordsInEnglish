@@ -29,30 +29,49 @@ let add = (counter, polish, english) => {
     polishWord: polish,
     englishWord: english,
   };
+  let deleteRow = (e) => {
+    if (e.target.className === `${english}`) {
+      let row = e.target.closest("tr");
+      row.remove();
+      let index = tab.findIndex((x) => x.englishWord === e.target.className);
+      tab.splice(index, 1);
+      test.splice(index, 1);
+    }
+  };
   addTab(counter, polish, english);
   for (let i = 0; i < 1; i++) {
     // creates a table row
     row = document.createElement("tr");
-
+    row.setAttribute("id", `${english}`);
     for (let j = 0; j < 1; j++) {
       const cell = document.createElement("td");
       const cell2 = document.createElement("td");
       const cell3 = document.createElement("td");
+      const cell4 = document.createElement("td");
+      const btnDel = document.createElement("button");
+      btnDel.textContent = "Delete";
+      btnDel.setAttribute("class", `${english}`);
+      btnDel.setAttribute("id", `btnDel`);
       const cellText = document.createTextNode(`${counter}`);
       const cellText2 = document.createTextNode(`${polish}`);
       const cellText3 = document.createTextNode(`${english}`);
       cell.appendChild(cellText);
       cell2.appendChild(cellText2);
       cell3.appendChild(cellText3);
+      cell4.appendChild(btnDel);
       row.appendChild(cell);
       row.appendChild(cell2);
       row.appendChild(cell3);
+      row.appendChild(btnDel);
+
+      btnDel.addEventListener("click", deleteRow);
     }
     tbody.appendChild(row);
   }
 
   search(tab);
 };
+
 let addTab = (counter, polish, english) => {
   test.push(
     (tab[counter] = {
@@ -60,7 +79,7 @@ let addTab = (counter, polish, english) => {
       englishWord: english,
     })
   );
-  //console.log("addtab");
+  console.log("64: " + counter);
 };
 
 btnCopy.addEventListener("click", () => {
@@ -76,12 +95,11 @@ let search = (tab) => {
 let drawWord;
 let counterGood = 0;
 let counterWrong = 0;
+
 btnDraw.addEventListener("click", () => {
   for (let i = 0; i < 1; i++) {
     // tworzenie losowego indeksu pomiędzy 0 i n - 1
     let r = Math.floor(Math.random() * tab.length);
-    //let r = Math.floor(Math.random() * tab.length);
-    //let r = Math.floor(Math.random() * (tab.length - 1)+1);
     if (tab.length < 1) {
       // tu było kieds <=
       console.log("dodaj cos lub odświerz dane");
@@ -113,35 +131,48 @@ btnRefresh.addEventListener("click", () => {
   console.log(tab);
 });
 
-let goodBad = () => {
-  // const third = document.querySelector(`#tbody tr:nth-child(${2})`);
-  console.log(third); // 👉️ div.child3
-  const tbody2 = document.querySelectorAll("#tbody tr");
-  for (let el of tbody2) {
-    console.log(el);
-    if (el.hasAttribute("id")) {
-      el.style.backgroundColor = "red";
-    }
-    // console.log(row);
-  }
-  //tbody.style.backgroundColor = "red";
-};
+// let goodBad = () => {
+//   // const third = document.querySelector(`#tbody tr:nth-child(${2})`);
+//   //console.log(third); // 👉️ div.child3
+//   const tbody2 = document.querySelectorAll("#tbody tr");
+//   for (let el of tbody2) {
+//     console.log(el);
+//     if (el.hasAttribute("id")) {
+//       el.style.backgroundColor = "red";
+//     }
+//     // console.log(row);
+//   }
+//   //tbody.style.backgroundColor = "red";
+// };
 btnCheck.addEventListener("click", () => {
   const checkWord = document.querySelector("#word").value;
-  // for (let [key, value] of Object.entries(tab[r])) {
-  //   console.log(key, value);
-  //   console.log(tab[r].englishWord);
+  const third = document.getElementById(`${drawWord}`);
   if (checkWord === drawWord) {
     counterGood++;
-    document.querySelector("#status-word").innerHTML =
-      "Bardzo dobrze: " + counterGood;
-    const third = document.querySelector(`#tbody tr:nth-child(${counter})`);
-    third.setAttribute("id", "Good");
-    //console.log("dobrze");
-  } else {
+    document.querySelector("#status-word").innerHTML = "Good: " + counterGood;
+    console.log(third);
+    third.classList.add("green");
+    if (third.classList.toggle("red")) {
+      third.classList.remove("red");
+      third.classList.add("green");
+      console.log("Change to green");
+    } else {
+      console.log("Nothing to change");
+    }
+  } else if (checkWord != drawWord) {
     counterWrong++;
-    document.getElementById("status-word").innerHTML = "Źle: " + counterWrong;
-    //console.log("źle");
+    document.getElementById("status-word").innerHTML = "Bad: " + counterWrong;
+    console.log(third);
+    third.classList.add("red");
+    if (third.classList.toggle("green")) {
+      third.classList.remove("green");
+      third.classList.add("red");
+      console.log("Change to red");
+    } else {
+      console.log("Nothing to change");
+    }
+  } else {
+    console.log("something different");
   }
-  goodBad();
+  //goodBad();
 });
