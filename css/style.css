@@ -41,3 +41,6 @@ main {
 .green {
   background-color: green;
 }
+.hidden-element {
+  visibility: hidden;
+}
