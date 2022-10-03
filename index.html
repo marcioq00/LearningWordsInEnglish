@@ -14,10 +14,24 @@
       <section id="box-add">
         <h1>Dodaj słówka do nauki</h1>
         <form>
-          Wyraz:
-          <input type="text" id="polish" value="" />
-          Tłumaczenie:
-          <input type="text" id="english" value="" />
+          <label for="polish">Wyraz:</label>
+          <input
+            type="text"
+            id="polish"
+            value=""
+            required
+            minlength="1"
+            maxlength="45"
+          />
+          <label for="english">Tłumaczenie:</label>
+          <input
+            type="text"
+            id="english"
+            value=""
+            required
+            minlength="1"
+            maxlength="45"
+          />
           <button type="button" id="btn">Dodaj</button>
         </form>
       </section>
@@ -25,7 +39,7 @@
         <h2>Utrwalanie słówek</h2>
         <form>
           <p id="display-word"></p>
-          Angielski
+          <label for="word">Angielski</label>
           <input type="text" id="word" value="" />
           <button
             type="button"
@@ -54,6 +68,7 @@
             <th>Wyraz</th>
             <th>Tłumaczenie</th>
             <th>Usuń</th>
+            <th>Pokaż</th>
           </tr>
         </thead>
         <tbody id="tbody"></tbody>

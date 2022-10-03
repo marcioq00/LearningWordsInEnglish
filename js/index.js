@@ -38,6 +38,22 @@ let add = (counter, polish, english) => {
       test.splice(index, 1);
     }
   };
+
+  let hiddenRow = (e) => {
+    const hidden = document.querySelector(
+      `#${e.target.className} :nth-child(3)`
+    );
+    // if (e.target.className === `${english}`) {
+    //   let row = e.target.closest("td");
+    // }
+    if (hidden.classList.contains("hidden-element")) {
+      hidden.classList.remove("hidden-element");
+      console.log("tak");
+    } else {
+      hidden.classList.add("hidden-element");
+      console.log("nie");
+    }
+  };
   addTab(counter, polish, english);
   for (let i = 0; i < 1; i++) {
     // creates a table row
@@ -48,9 +64,13 @@ let add = (counter, polish, english) => {
       const cell2 = document.createElement("td");
       const cell3 = document.createElement("td");
       const cell4 = document.createElement("td");
+      const cell5 = document.createElement("td");
       const btnDel = document.createElement("button");
+      const btnShow = document.createElement("button");
       btnDel.textContent = "Delete";
+      btnShow.textContent = "Show";
       btnDel.setAttribute("class", `${english}`);
+      btnShow.setAttribute("class", `${english}`);
       btnDel.setAttribute("id", `btnDel`);
       const cellText = document.createTextNode(`${counter}`);
       const cellText2 = document.createTextNode(`${polish}`);
@@ -58,13 +78,17 @@ let add = (counter, polish, english) => {
       cell.appendChild(cellText);
       cell2.appendChild(cellText2);
       cell3.appendChild(cellText3);
+      cell3.classList.add("hidden-element");
       cell4.appendChild(btnDel);
+      cell5.appendChild(btnShow);
       row.appendChild(cell);
       row.appendChild(cell2);
       row.appendChild(cell3);
-      row.appendChild(btnDel);
+      row.appendChild(cell4);
+      row.appendChild(cell5);
 
       btnDel.addEventListener("click", deleteRow);
+      btnShow.addEventListener("click", hiddenRow);
     }
     tbody.appendChild(row);
   }
@@ -147,6 +171,7 @@ btnRefresh.addEventListener("click", () => {
 btnCheck.addEventListener("click", () => {
   const checkWord = document.querySelector("#word").value;
   const third = document.getElementById(`${drawWord}`);
+  console.log(third);
   if (checkWord === drawWord) {
     counterGood++;
     document.querySelector("#status-word").innerHTML = "Good: " + counterGood;
