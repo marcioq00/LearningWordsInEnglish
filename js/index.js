@@ -1,5 +1,4 @@
 // https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
-// https://stackoverflow.com/questions/22216349/how-to-iterate-through-td-in-a-tbody
 
 const btn = document.querySelector("#btn");
 const btnDraw = document.querySelector("#btn__draw");
@@ -14,28 +13,58 @@ let test = [];
 let counter = -1;
 
 btn.addEventListener("click", () => {
-  const polish = document.querySelector("#polish").value;
-  const english = document.querySelector("#english").value;
-  if (polish !== "" && english !== "") {
+  const polish = document.querySelector("#polish").value.trim();
+  const english = document.querySelector("#english").value.trim();
+  validation(polish, english);
+});
+
+let validation = (polish, english) => {
+  const regex = /^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{1,45}$/im;
+  if (regex.test(polish) == true && regex.test(english) == true) {
+    console.log("polish and english are good");
     counter++;
     add(counter, polish, english);
+    //addTab(counter, polish, english);
   } else {
-    console.log("Data is empty");
+    console.log("Data is empty or the data contains inappropriate characters");
   }
-});
+};
 let row;
 let add = (counter, polish, english) => {
-  tab[counter] = {
-    polishWord: polish,
-    englishWord: english,
-  };
+  // test.push(
+  //   (tab[counter] = {
+  //     polishWord: polish,
+  //     englishWord: english,
+  //   })
+  // );
+
+  for (let value of Object.values(tab)) {
+    console.log(value.polishWord);
+    if (value.polishWord === polish && value.englishWord === english) {
+      console.log("Duplicate data");
+    } else {
+      // tab[counter] = {
+      //   polishWord: polish,
+      //   englishWord: english,
+      // };
+    }
+  }
+
   let deleteRow = (e) => {
     if (e.target.className === `${english}`) {
       let row = e.target.closest("tr");
-      row.remove();
       let index = tab.findIndex((x) => x.englishWord === e.target.className);
-      tab.splice(index, 1);
-      test.splice(index, 1);
+      let index1 = test.findIndex((x) => x.englishWord === e.target.className);
+      if (index === -1) {
+        console.log("Index doesn't exist");
+        test.splice(index1, 1);
+        row.remove();
+      } else {
+        console.log("Delete index");
+        tab.splice(index, 1);
+        test.splice(index1, 1);
+        row.remove();
+      }
     }
   };
 
@@ -43,9 +72,7 @@ let add = (counter, polish, english) => {
     const hidden = document.querySelector(
       `#${e.target.className} :nth-child(3)`
     );
-    // if (e.target.className === `${english}`) {
-    //   let row = e.target.closest("td");
-    // }
+
     if (hidden.classList.contains("hidden-element")) {
       hidden.classList.remove("hidden-element");
       console.log("tak");
@@ -72,10 +99,10 @@ let add = (counter, polish, english) => {
       btnDel.setAttribute("class", `${english}`);
       btnShow.setAttribute("class", `${english}`);
       btnDel.setAttribute("id", `btnDel`);
-      const cellText = document.createTextNode(`${counter}`);
+      //const cellText = document.createTextNode(`${counter}`);
       const cellText2 = document.createTextNode(`${polish}`);
       const cellText3 = document.createTextNode(`${english}`);
-      cell.appendChild(cellText);
+      //cell.appendChild(cellText);
       cell2.appendChild(cellText2);
       cell3.appendChild(cellText3);
       cell3.classList.add("hidden-element");
@@ -155,19 +182,6 @@ btnRefresh.addEventListener("click", () => {
   console.log(tab);
 });
 
-// let goodBad = () => {
-//   // const third = document.querySelector(`#tbody tr:nth-child(${2})`);
-//   //console.log(third); // 👉️ div.child3
-//   const tbody2 = document.querySelectorAll("#tbody tr");
-//   for (let el of tbody2) {
-//     console.log(el);
-//     if (el.hasAttribute("id")) {
-//       el.style.backgroundColor = "red";
-//     }
-//     // console.log(row);
-//   }
-//   //tbody.style.backgroundColor = "red";
-// };
 btnCheck.addEventListener("click", () => {
   const checkWord = document.querySelector("#word").value;
   const third = document.getElementById(`${drawWord}`);
@@ -199,5 +213,4 @@ btnCheck.addEventListener("click", () => {
   } else {
     console.log("something different");
   }
-  //goodBad();
 });
