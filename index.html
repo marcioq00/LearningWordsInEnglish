@@ -4,75 +4,79 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="s" />
 
-    <link rel="stylesheet" href="css/style.css" />
     <title>Fiszki angielski</title>
     <script src="js/index.js" defer></script>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <main>
-      <section id="box-add">
-        <h1>Dodaj słówka do nauki</h1>
-        <form>
-          <label for="polish">Wyraz:</label>
-          <input
-            type="text"
-            id="polish"
-            value=""
-            required
-            minlength="1"
-            maxlength="45"
-          />
-          <label for="english">Tłumaczenie:</label>
-          <input
-            type="text"
-            id="english"
-            value=""
-            required
-            minlength="1"
-            maxlength="45"
-          />
-          <button type="button" id="btn">Dodaj</button>
-        </form>
+      <div class="container">
+        <section id="box-add" class="box-add-style">
+          <h1>Dodaj słówka do nauki</h1>
+          <form>
+            <label for="polish">Polski:</label>
+            <input
+              type="text"
+              id="polish"
+              value=""
+              required
+              minlength="1"
+              maxlength="45"
+            />
+            <label for="english">Angielski:</label>
+            <input
+              type="text"
+              id="english"
+              value=""
+              required
+              minlength="1"
+              maxlength="45"
+            />
+            <button type="button" id="btn">Dodaj</button>
+          </form>
+        </section>
+        <section id="box-check">
+          <h2>Utrwalanie słówek</h2>
+          <form>
+            <p id="display-word"></p>
+            <label for="word">Angielski</label>
+            <input type="text" id="word" value="" />
+            <button
+              type="button"
+              id="btn__draw"
+              class="box-check__btn box-check__btn-next"
+            >
+              Następne
+            </button>
+            <button type="button" id="btn__check" class="box-check__btn">
+              Sprawdz
+            </button>
+            <button type="button" id="btn__refresh" class="box-check__btn">
+              Pokaz tabele
+            </button>
+            <button type="button" id="btn__copy" class="box-check__btn">
+              Pokaz kopie tabeli
+            </button>
+            <p id="counter"></p>
+          </form>
+        </section>
+      </div>
+      <section id="box-table">
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Polski</th>
+              <th>Angielski</th>
+              <th>Usuń</th>
+              <th>Pokaż</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
       </section>
-      <section id="box-check">
-        <h2>Utrwalanie słówek</h2>
-        <form>
-          <p id="display-word"></p>
-          <label for="word">Angielski</label>
-          <input type="text" id="word" value="" />
-          <button
-            type="button"
-            id="btn__draw"
-            class="box-check__btn box-check__btn-next"
-          >
-            Następne
-          </button>
-          <button type="button" id="btn__check" class="box-check__btn">
-            Sprawdz
-          </button>
-          <button type="button" id="btn__refresh" class="box-check__btn">
-            Pokaz tabele
-          </button>
-          <button type="button" id="btn__copy" class="box-check__btn">
-            Pokaz kopie tabeli
-          </button>
-          <p id="status-word"></p>
-          <p id="counter"></p>
-        </form>
-      </section>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Wyraz</th>
-            <th>Tłumaczenie</th>
-            <th>Usuń</th>
-            <th>Pokaż</th>
-          </tr>
-        </thead>
-        <tbody id="tbody"></tbody>
-      </table>
     </main>
   </body>
 </html>
