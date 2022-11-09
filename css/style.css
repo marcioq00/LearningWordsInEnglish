@@ -10,20 +10,27 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  /* flex-direction: column; */
   height: 100vh;
 }
 #box-add {
-  border: 1px solid red;
+  /* border: 2px solid green; */
   height: 150px;
   width: 800px;
 }
+.box-add-style {
+  border: 2px solid gray;
+}
 #box-check {
   margin-top: 20px;
-  border: 1px solid green;
+  border: 2px solid green;
   height: 200px;
   width: 800px;
 }
+/* #box-table {
+  display: flex;
+  background-color: red;
+} */
 .box-check__btn {
   width: 150px;
   height: 40px;
@@ -37,6 +44,12 @@ main {
 }
 .red {
   background-color: red;
+}
+.green-border {
+  border: 2px solid green;
+}
+.red-border {
+  border: 2px solid red;
 }
 .green {
   background-color: green;
